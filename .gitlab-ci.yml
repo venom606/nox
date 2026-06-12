@@ -1,0 +1,11 @@
+# Deploys the static site in public/ to GitLab Pages.
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "Publishing static site from public/"
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
