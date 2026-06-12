@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULLSECTOR // terminal</title>
+  <meta name="description" content="A hacker-themed terminal with an AI assistant and real developer utilities." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="crt">
+    <header class="topbar">
+      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      <span class="title">root@nullsector:~#</span>
+      <span class="clock" id="clock">--:--:--</span>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-view="terminal">[ terminal ]</button>
+      <button class="tab" data-view="assistant">[ assistant ]</button>
+      <button class="tab" data-view="tools">[ tools ]</button>
+    </nav>
+
+    <main>
+      <!-- TERMINAL -->
+      <section class="view active" id="view-terminal">
+        <div class="terminal" id="terminal"></div>
+        <div class="prompt-line">
+          <span class="ps1">root@nullsector:~#</span>
+          <input id="cmd" autocomplete="off" spellcheck="false" autofocus />
+        </div>
+      </section>
+
+      <!-- ASSISTANT -->
+      <section class="view" id="view-assistant">
+        <div class="chat" id="chat"></div>
+        <div class="prompt-line">
+          <span class="ps1">you&gt;</span>
+          <input id="chatInput" autocomplete="off" spellcheck="false" placeholder="ask the assistant..." />
+          <button id="chatSend">send</button>
+        </div>
+      </section>
+
+      <!-- TOOLS -->
+      <section class="view" id="view-tools">
+        <div class="tools-grid">
+          <div class="tool">
+            <h3>// hash generator</h3>
+            <select id="hashAlgo">
+              <option>SHA-256</option><option>SHA-1</option><option>SHA-384</option><option>SHA-512</option>
+            </select>
+            <textarea id="hashIn" placeholder="text to hash"></textarea>
+            <button data-act="hash">compute</button>
+            <output id="hashOut"></output>
+          </div>
+
+          <div class="tool">
+            <h3>// base64</h3>
+            <textarea id="b64In" placeholder="text or base64"></textarea>
+            <div class="row">
+              <button data-act="b64enc">encode</button>
+              <button data-act="b64dec">decode</button>
+            </div>
+            <output id="b64Out"></output>
+          </div>
+
+          <div class="tool">
+            <h3>// url encode</h3>
+            <textarea id="urlIn" placeholder="text or url"></textarea>
+            <div class="row">
+              <button data-act="urlenc">encode</button>
+              <button data-act="urldec">decode</button>
+            </div>
+            <output id="urlOut"></output>
+          </div>
+
+          <div class="tool">
+            <h3>// password generator</h3>
+            <label>length <input type="number" id="pwLen" value="20" min="6" max="128" /></label>
+            <label><input type="checkbox" id="pwSym" checked /> symbols</label>
+            <button data-act="pwgen">generate</button>
+            <output id="pwOut"></output>
+          </div>
+
+          <div class="tool">
+            <h3>// uuid v4</h3>
+            <button data-act="uuid">generate</button>
+            <output id="uuidOut"></output>
+          </div>
+
+          <div class="tool">
+            <h3>// jwt decoder</h3>
+            <textarea id="jwtIn" placeholder="paste a JWT (read-only, not verified)"></textarea>
+            <button data-act="jwt">decode</button>
+            <output id="jwtOut"></output>
+          </div>
+
+          <div class="tool">
+            <h3>// json formatter</h3>
+            <textarea id="jsonIn" placeholder="paste JSON"></textarea>
+            <button data-act="json">format</button>
+            <output id="jsonOut"></output>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="statusbar">
+      <span id="status">SYSTEM ONLINE</span>
+      <span class="spacer"></span>
+      <span>NULLSECTOR v1.0 // all tools run locally in your browser</span>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
